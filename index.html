@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Canvas</title>
+        <link rel="stylesheet" href="css.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="outerdiv">
+            <div class="canvasdiv">
+                <canvas id="canvas" width="600" height="600"></canvas>
+            </div>
+            <div class="userdiv">
+                <h3>Canvas to Image Converter</h3>
+                <fieldset>
+                    <legend>Image Inputs:</legend>
+                    <!-- Upload Image -->
+                    <label for="show">Upload Image:</label>
+                    <input type="file"  id="show" accept="image/png, image/jpeg" onchange="showImage(this);">
+                    <button type="button" class="btn" id="previewImg" onclick="previewImg();">Preview Image on Canvas</button>
+                    <!-- Text On Image -->
+                    <label for="imgtext">Enter text to write on the Image:</label>
+                    <input class="textInput" type="text" id="imgtext" maxlength="150" placeholder="Text on Image" onkeyup="showText();">
+                    <!-- Font Color in Image -->
+                    <label for="ficolor">Choose Text Color on the Image:</label>
+                    <input type="color" class="btnColor" id="ficolor" value="#000000" oninput="showFColor();">
+                </fieldset>
+                <fieldset>
+                    <legend>Header Inputs:</legend>
+                    <!-- Text in Header -->
+                    <label for="htext">Enter the text in Header:</label>
+                    <input class="textInput" type="text" id="htext" maxlength="28" placeholder="Text in Header" onkeyup="showText();">
+                    <!-- Font Color in Header -->
+                    <div>
+                        <label for="fhcolor">Choose Text Color in the Header:</label>
+                        <input type="color" class="btnColor" id="fhcolor" value="#000000" oninput="showFColor();">
+                    </div>
+                    <!-- Background Color of Header -->
+                    <label for="hcolor">Choose background color for the Header:</label>
+                    <input type="color" class="btnColor" id="hcolor" value="#ffffff" oninput="showColor();">
+                </fieldset>
+                <fieldset>
+                    <legend>Footer Inputs:</legend>
+                    <!-- Text in Footer -->
+                    <label for="ftext">Enter the text in Footer:</label>
+                    <input class="textInput" type="text" id="ftext" maxlength="28" placeholder="Text in Footer" onkeyup="showText();">
+                    <!-- Font Color in Footer -->
+                    <div>
+                        <label for="ffcolor">Choose Text Color in the Footer:</label>
+                        <input type="color" class="btnColor" id="ffcolor" value="#000000" oninput="showFColor();">
+                    </div>
+                    <!-- Background Color of Footer -->
+                    <label for="fcolor">Choose background color for the Footer:</label>
+                    <input type="color" class="btnColor" id="fcolor" value="#ffffff" oninput="showColor();">
+                </fieldset>
+                <button type="button" class="btn" id="downloadBtn" onclick="downloadImg();">Download Image</button>
+                <button type="button" class="btn" id="clearBtn" onclick="clearCanvas();">Clear Canvas</button>
+            </div>
+        </div>
+
+        <img id="downloadedImg">
+        <img id="preview">
+
+        <script>
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.font = "30px Montserrat";
+            var image = document.getElementById("preview");
+            var hcolor = document.getElementById("hcolor");
+            var fcolor = document.getElementById("fcolor");
+            var fhcolor = document.getElementById("fhcolor");
+            var downloadedImg = document.getElementById("downloadedImg");
+            var filename = document.getElementById("imgtext").value;
+            //Upload Image
+            function showImage(input){
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    image.setAttribute("src", e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+            //Show Image
+            function previewImg(){
+                ctx.clearRect(0, 0, 600, 450);
+                ctx.drawImage(image, 0, 75, 600, 450);
+                showText();
+            }
+            //Add Color
+            function showColor(){
+                ctx.clearRect (0, 0, 600, 600);
+                ctx.drawImage(image, 0, 75, 600, 450);
+                ctx.fillStyle = hcolor.value;
+                ctx.fillRect(0,0,600,75);
+                ctx.fillStyle = fcolor.value;
+                ctx.fillRect(0,525,600,75);
+                ctx.fillStyle = "black";
+                addText();
+            }
+            function showFColor(){
+                ctx.clearRect (0, 0, 600, 600);
+                ctx.drawImage(image, 0, 75, 600, 450);
+                ctx.fillStyle = hcolor.value;
+                ctx.fillRect(0,0,600,75);
+                ctx.fillStyle = fcolor.value;
+                ctx.fillRect(0,525,600,75);
+                addText();
+            }
+            //Show Text
+            function addText(){
+                ctx.fillStyle = fhcolor.value;
+                ctx.textAlign = "center";
+                var htext = document.getElementById("htext").value;
+                ctx.fillText(htext,300,45);
+                ctx.fillStyle = ficolor.value;
+                var imgtext = document.getElementById("imgtext").value;
+                ctx.fillText(imgtext,300,290);
+                ctx.fillStyle = ffcolor.value;
+                var ftext = document.getElementById("ftext").value;
+                ctx.fillText(ftext,300,575);
+            }
+            //Add Text
+            function showText(){
+                ctx.font = "30px Montserrat";
+                ctx.clearRect (0, 0, 600, 600);
+                ctx.drawImage(image, 0, 75, 600, 450);
+                showColor();
+                showFColor();
+            }
+            //Download Image
+            function downloadImg(){
+                const dataURI = canvas.toDataURL();
+                downloadedImg.src = dataURI;
+
+                if(window.navigator.msSaveBlob){
+                    window.navigator.msSaveBlob(canvas.msToBlob(),"download.png");
+                }
+                else{
+                    const a = document.createElement("a");
+                    document.body.appendChild(a);
+                    a.href = dataURI;
+                    a.download = filename;
+                    a.click();
+                    document.body.removeChild(a);
+                }
+            }
+            //Clear Canvas
+            function clearCanvas(){
+                ctx.clearRect (0, 0, 600, 600);
+                image.src = "";
+                hcolor.value = "#ffffff";
+                fcolor.value = "#ffffff";
+                fhcolor.value = "";
+                ficolor.value = "";
+                ffcolor.value = "";
+                imgtext.value = "";
+                htext.value = "";
+                ftext.value = "";
+                show.value = "";
+            }
+        </script>
+    </body>
+</html>
