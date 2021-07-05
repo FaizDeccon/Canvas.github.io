@@ -29,7 +29,7 @@ input{
 }
 h3{
     margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     font-size: 24px;
     font-weight: 600;
     color: white;
@@ -45,7 +45,7 @@ fieldset{
     border-radius: 5px;
     outline: none;
     border-color: rgb(95, 175, 255);
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 legend{
     color: dodgerblue;
