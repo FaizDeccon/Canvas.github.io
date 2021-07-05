@@ -15,47 +15,49 @@
             </div>
             <div class="userdiv">
                 <h3>Canvas to Image Converter</h3>
-                <fieldset>
-                    <legend>Image Inputs:</legend>
-                    <!-- Upload Image -->
-                    <label for="show">Upload Image:</label>
-                    <input type="file"  id="show" accept="image/png, image/jpeg" onchange="showImage(this);">
-                    <button type="button" class="btn" id="previewImg" onclick="previewImg();">Preview Image on Canvas</button>
-                    <!-- Text On Image -->
-                    <label for="imgtext">Enter text to write on the Image:</label>
-                    <input class="textInput" type="text" id="imgtext" maxlength="150" placeholder="Text on Image" onkeyup="showText();">
-                    <!-- Font Color in Image -->
-                    <label for="ficolor">Choose Text Color on the Image:</label>
-                    <input type="color" class="btnColor" id="ficolor" value="#000000" oninput="showFColor();">
-                </fieldset>
-                <fieldset>
-                    <legend>Header Inputs:</legend>
-                    <!-- Text in Header -->
-                    <label for="htext">Enter the text in Header:</label>
-                    <input class="textInput" type="text" id="htext" maxlength="28" placeholder="Text in Header" onkeyup="showText();">
-                    <!-- Font Color in Header -->
-                    <div>
-                        <label for="fhcolor">Choose Text Color in the Header:</label>
-                        <input type="color" class="btnColor" id="fhcolor" value="#000000" oninput="showFColor();">
-                    </div>
-                    <!-- Background Color of Header -->
-                    <label for="hcolor">Choose background color for the Header:</label>
-                    <input type="color" class="btnColor" id="hcolor" value="#ffffff" oninput="showColor();">
-                </fieldset>
-                <fieldset>
-                    <legend>Footer Inputs:</legend>
-                    <!-- Text in Footer -->
-                    <label for="ftext">Enter the text in Footer:</label>
-                    <input class="textInput" type="text" id="ftext" maxlength="28" placeholder="Text in Footer" onkeyup="showText();">
-                    <!-- Font Color in Footer -->
-                    <div>
-                        <label for="ffcolor">Choose Text Color in the Footer:</label>
-                        <input type="color" class="btnColor" id="ffcolor" value="#000000" oninput="showFColor();">
-                    </div>
-                    <!-- Background Color of Footer -->
-                    <label for="fcolor">Choose background color for the Footer:</label>
-                    <input type="color" class="btnColor" id="fcolor" value="#ffffff" oninput="showColor();">
-                </fieldset>
+                <div class="field_bg">
+                    <fieldset>
+                        <legend>Image Inputs:</legend>
+                        <!-- Upload Image -->
+                        <label for="show">Upload Image:</label>
+                        <input type="file"  id="show" accept="image/png, image/jpeg" onchange="showImage(this);">
+                        <button type="button" class="btn" id="previewImg" onclick="previewImg();">Preview Image on Canvas</button>
+                        <!-- Text On Image -->
+                        <label for="imgtext">Enter text to write on the Image:</label>
+                        <input class="textInput" type="text" id="imgtext" maxlength="150" placeholder="Text on Image" onkeyup="showText();">
+                        <!-- Font Color in Image -->
+                        <label for="ficolor">Choose Text Color on the Image:</label>
+                        <input type="color" class="btnColor" id="ficolor" value="#000000" oninput="showFColor();">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Header Inputs:</legend>
+                        <!-- Text in Header -->
+                        <label for="htext">Enter the text in Header:</label>
+                        <input class="textInput" type="text" id="htext" maxlength="28" placeholder="Text in Header" onkeyup="showText();">
+                        <!-- Font Color in Header -->
+                        <div>
+                            <label for="fhcolor">Choose Text Color in the Header:</label>
+                            <input type="color" class="btnColor" id="fhcolor" value="#000000" oninput="showFColor();">
+                        </div>
+                        <!-- Background Color of Header -->
+                        <label for="hcolor">Choose background color for the Header:</label>
+                        <input type="color" class="btnColor" id="hcolor" value="#ffffff" oninput="showColor();">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Footer Inputs:</legend>
+                        <!-- Text in Footer -->
+                        <label for="ftext">Enter the text in Footer:</label>
+                        <input class="textInput" type="text" id="ftext" maxlength="28" placeholder="Text in Footer" onkeyup="showText();">
+                        <!-- Font Color in Footer -->
+                        <div>
+                            <label for="ffcolor">Choose Text Color in the Footer:</label>
+                            <input type="color" class="btnColor" id="ffcolor" value="#000000" oninput="showFColor();">
+                        </div>
+                        <!-- Background Color of Footer -->
+                        <label for="fcolor">Choose background color for the Footer:</label>
+                        <input type="color" class="btnColor" id="fcolor" value="#ffffff" oninput="showColor();">
+                    </fieldset>
+                </div>
                 <button type="button" class="btn" id="downloadBtn" onclick="downloadImg();">Download Image</button>
                 <button type="button" class="btn" id="clearBtn" onclick="clearCanvas();">Clear Canvas</button>
             </div>
